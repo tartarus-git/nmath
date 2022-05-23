@@ -1,4 +1,4 @@
-#include "nmath/vectors/Vector2f.h"
+#include "vectors/Vector2f.h"
 
 #include <cmath>
 
