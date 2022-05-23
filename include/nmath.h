@@ -1,7 +1,7 @@
 #pragma once
 
-#include "vectors/Vector2f.h"
-#include "vectors/Vector3f.h"
-#include "vectors/Vector4f.h"
+#include "../include/nmath/vectors/Vector2f.h"
+#include "../include/nmath/vectors/Vector3f.h"
+#include "../include/nmath/vectors/Vector4f.h"
 
-#include "constants.h"
+#include "../include/nmath/constants.h"
