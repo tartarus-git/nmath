@@ -1,7 +1,7 @@
 #include "../include/nmath/vectors/Vector3f.h"
 
-Vector3f Vector3f::rotate(const Vector3f& rot) const noexcept {			// NOTE: This should be constexpr but the trig functions don't allow that for some reason. Can't write our own because the trig functions might be optimized for each platform and writing our own would lose us performance.
-	Vector3f result;
+nmath::Vector3f nmath::Vector3f::rotate(const Vector3f& rot) const noexcept {			// NOTE: This should be constexpr but the trig functions don't allow that for some reason. Can't write our own because the trig functions might be optimized for each platform and writing our own would lose us performance.
+	nmath::Vector3f result;
 
 	float cosine = cos(rot.y);
 	float sine = sin(rot.y);
