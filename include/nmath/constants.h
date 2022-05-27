@@ -1,3 +1,5 @@
 #pragma once
 
-#define CONSTANTS_PI 3.14159265358979323846f
+namespace nmath::constants {
+	constexpr float pi = 3.14159265358979323846f;
+}
