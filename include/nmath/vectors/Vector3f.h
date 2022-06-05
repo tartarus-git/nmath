@@ -10,6 +10,26 @@ namespace nmath {
 		float y;
 		float z;
 
+
+
+		// TODO: idk if this is always super efficient. Check if it's really ok to let the user do this.
+		constexpr float& operator[](char index) noexcept {
+			switch (index) {
+			case 0: return x;
+			case 1: return y;
+			case 2: return z;
+			}
+			// Or like this (to support weird stuff the user might want to do):
+			/*
+			* 
+			* 
+			* return *(float*)(this + index);
+			* 
+			*/
+		}
+
+
+
 		constexpr Vector3f() = default;
 		constexpr Vector3f(float x, float y, float z) noexcept : x(x), y(y), z(z) { }
 
