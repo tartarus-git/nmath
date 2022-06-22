@@ -21,7 +21,7 @@ namespace nmath {
 	template <typename uint_t>
 	constexpr std::vector<uint_t> calcIntFactorsOf(uint_t input) {			// TODO: Does there exist a better way.
 		static_assert(std::is_integral<uint_t>{}, "calcIntFactorsOf failed: input must be of unsigned integral type");
-		uint_t cielRoot = integer_sqrt(input) + 1;
+		uint_t cielRoot = integer_sqrt(input) + 1;			// TODO: I don't really understand why this must be + 1 here.
 		std::vector<uint_t> result;
 		for (uint_t i = 0; i < cielRoot; i++) {
 			if (input % i == 0) {
@@ -48,24 +48,24 @@ namespace nmath {
 		if (lowResult.back() == highResult.front()) {
 			result.reserve(lowResult.size() - 1 + highResult.size());
 			result.insert(result.end(), lowResult.begin(), lowResult.end() - 1);
-			result.insert(result.end(), highResult.begin(), highResult.end());
+			result.insert(result.end(), highResult.rbegin(), highResult.rend());
 			return result;
 		}
 		result.reserve(lowResult.size() + highResult.size());
 		result.insert(result.end(), lowResult.begin(), lowResult.end());
-		result.insert(result.end(), highResult.begin(), highResult.end());
+		result.insert(result.end(), highResult.rbegin(), highResult.rend());
 		return result;
 	}
 
 	template <typename uint_t>
 	constexpr std::pair<uint_t, uint_t> calcSmallestBoundingBox(uint_t area) {
 		static_assert(std::is_unsigned<uint_t>{}, "calcSmallestBoundingBox failed: area must be of unsigned integral type");
-		std::vector<uint_t> sortedFactors = calcSortedIntFactorsOf(area);
-		// TODO: If the square root inside calcSortedIntFactorsOf turns out round, you can just return it as width and height. You're going to have to rewrite a lot of code and not do this function call inside here, or else you won't be able to get the data.
-		uint_t length = sortedFactors.size();
-		uint_t middle = length / 2;
-		uint_t width = sortedFactors[middle];
-		if (length % 2 == 0) { return std::make_pair(width, sortedFactors[middle + 1]); }			// TODO: This check will be unnecessary since it will always be even if you reimplement the other code here. This will happen because you can join the high and low list while potentially repeating the middle thing. So always even. Is better.
-		return std::make_pair(width, width);
+		uint_t cielRoot = integer_sqrt(area);
+		for (uint_t i = cielRoot; i >= 2; i--) {
+			if (area % i == 0) {
+				return std::make_pair(i, area / i);
+			}
+		}
+		return std::make_pair(1, area);
 	}
 }
